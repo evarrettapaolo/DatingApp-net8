@@ -12,7 +12,7 @@ export class AccountService {
   currentUser = signal<User | null>(null);
 
   login(model: any) {
-    return this.http.post<User>(this.baseurl + 'account/register', model).pipe(
+    return this.http.post<User>(this.baseurl + 'account/login', model).pipe(
       map(user => {
         if(user) {
           localStorage.setItem('user', JSON.stringify(user));
@@ -37,7 +37,5 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUser.set(null);
-  }
-
-  
+  }  
 }
