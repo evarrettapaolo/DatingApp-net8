@@ -9,12 +9,13 @@ import { HomeComponent } from './home/home.component';
   standalone: true,
   imports: [RouterOutlet, NavComponent, HomeComponent],
   templateUrl: './app.component.html',
-  styles: [`
-    .container {
-      margin-top: 100px;
-    }
-    
-  `],
+  styles: [
+    `
+      .container {
+        margin-top: 100px;
+      }
+    `,
+  ],
 })
 export class AppComponent implements OnInit {
   private accountService = inject(AccountService);
