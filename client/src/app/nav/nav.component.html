@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top border-bottom">
-  <div class="container">
+  <div class="container-fluid">
     <a class="navbar-brand" href="#">Dating App</a>
 
     <!-- nav tabs -->
@@ -14,7 +14,7 @@
         >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/lists" routerLinkActive="text-warning"
+        <a class="nav-link" routerLink="/lists" routerLinkActive="text-"
           >Lists</a
         >
       </li>
@@ -33,7 +33,7 @@
         >
       </li>
     </ul>
-    <!-- drop down menu -->
+    <!-- * drop down menu -->
     @if(accountService.currentUser()) {
     <div class="dropdown" dropdown>
       <a dropdownToggle class="dropdown-toggle text-light text-decoration-none"
@@ -45,7 +45,7 @@
         <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>
     </div>
-    <!-- login form -->
+    <!-- * login form -->
     } @if(!accountService.currentUser()) {
     <form
       #loginForm="ngForm"
@@ -56,7 +56,7 @@
       <input
         name="username"
         [(ngModel)]="model.username"
-        class="form-control me-2 text-white placeholder-wave"
+        class="form-control ms-2 me-2 text-white placeholder-wave"
         placeholder="Username"
         type="text"
       />

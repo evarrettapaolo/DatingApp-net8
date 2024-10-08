@@ -17,14 +17,7 @@ import { TitleCasePipe } from '@angular/common';
     TitleCasePipe,
   ],
   templateUrl: './nav.component.html',
-  styles: [
-    `
-      .dropdown a,
-      .nav-item a {
-        cursor: pointer;
-      }
-    `,
-  ],
+  styleUrl: './nav.component.scss',
 })
 export class NavComponent {
   accountService = inject(AccountService);
