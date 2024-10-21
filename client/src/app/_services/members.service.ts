@@ -40,6 +40,20 @@ export class MembersService {
     );
   }
 
+  updateMembersSignalState(member: Member) {
+    this.members.update((members) => {
+      // * add a member in the members signal
+      if (!members.includes(member)) {
+        members.push(member);
+        return members;
+      }
+      // * update the member state in the members signal
+      members.map((m) => (m.username === member.username ? member : m));
+      return members;
+    }
+    );
+  }
+
   setMainPhoto(photo: Photo) {
     return this.http
       .put(this.baseUrl + 'users/set-main-photo/' + photo.id, {})

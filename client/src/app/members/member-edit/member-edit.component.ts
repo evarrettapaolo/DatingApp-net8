@@ -12,7 +12,7 @@ import { MembersService } from '../../_services/members.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
+import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
 
 @Component({
   selector: 'app-member-edit',
@@ -39,8 +39,20 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     const user = this.accountService.currentUser();
     if (!user) return;
+    // * check if member is already loaded in members signal
+    const currentMember = this.memberService
+      .members()
+      .find((m) => m.username === user.username);
+    if (currentMember) {
+      this.member = currentMember;
+      return;
+    }
+    // * make a request
     this.memberService.getMember(user.username).subscribe({
-      next: (member) => (this.member = member),
+      next: (member) => {
+        this.member = member;
+        this.memberService.updateMembersSignalState(member);
+      },
     });
   }
 

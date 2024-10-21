@@ -4,7 +4,7 @@ namespace API.Entities
 {
   public class AppUser
   {
-    public int Id { get; set; } // auto incremented
+    public int Id { get; set; } // * auto incremented
     public required string UserName { get; set; }
     public byte[] PasswordHash { get; set; } = [];
     public byte[] PasswordSalt { get; set; } = [];

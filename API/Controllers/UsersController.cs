@@ -19,7 +19,7 @@ namespace API.Controllers
       return Ok(users);
     }
 
-    [HttpGet("{username}")] // api/user/2
+    [HttpGet("{username}")] // * api/user/2
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
       var user = await userRepository.GetMemberAsync(username);
@@ -60,9 +60,11 @@ namespace API.Controllers
         PublicId = result.PublicId
       };
 
+      if(user.Photos.Count == 0) photo.IsMain = true;
+
       user.Photos.Add(photo);
 
-      // response consist a location header
+      // * response consist a location header
       if (await userRepository.SaveAllAsync()) return CreatedAtAction(nameof(GetUser), new { username = user.UserName }, mapper.Map<PhotoDto>(photo));
 
       return BadRequest("Problem adding photo");

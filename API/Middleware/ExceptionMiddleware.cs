@@ -18,7 +18,7 @@ namespace API.Middleware
         context.Response.ContentType = "application/json";
         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-        // choose type of detail returned
+        // * choose type of detail returned
         var response = env.IsDevelopment()
           ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace)
           : new ApiException(context.Response.StatusCode, ex.Message, "Internal server error");
