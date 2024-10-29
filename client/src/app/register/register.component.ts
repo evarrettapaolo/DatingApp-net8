@@ -76,8 +76,6 @@ export class RegisterComponent implements OnInit {
     this.registerForm.patchValue({ dateOfBirth: dob });
     this.accountService.register(this.registerForm.value).subscribe({
       next: (response) => {
-        // * refresh members signal, with newly added member
-        this.memberService.getMembers();
         this.router.navigateByUrl('/members');
       },
       error: (error) => (this.validationErrors = error),

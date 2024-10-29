@@ -1,8 +1,8 @@
 @if(member) {
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <!-- * card -->
-    <div class="col-4">
+    <div class="col-5 col-lg-3">
       <div class="card">
         <!-- * image -->
         <img
@@ -15,6 +15,7 @@
           <div>
             <strong>Location:</strong>
             <p>{{ member.city }}, {{ member.country }}</p>
+            
           </div>
           <div>
             <strong>Age:</strong>
@@ -22,11 +23,11 @@
           </div>
           <div>
             <strong>Last Active:</strong>
-            <p>{{ member.lastActive }}</p>
+            <p>{{ member.lastActive | timeago}}</p>
           </div>
           <div>
             <strong>Member since:</strong>
-            <p>{{ member.created }}</p>
+            <p>{{ member.created | date: 'longDate'}}</p>
           </div>
         </div>
         <!-- * footer -->
@@ -39,7 +40,7 @@
       </div>
     </div>
     <!-- * tabset -->
-    <div class="col-8">
+    <div class="col-7 col-lg-9">
       <tabset class="member-tabset">
         <tab heading="About {{ member.knownAs }}">
           <h4>Description</h4>

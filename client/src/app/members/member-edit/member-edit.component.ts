@@ -13,11 +13,13 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from '../photo-editor/photo-editor.component';
+import { TimeagoModule } from 'ngx-timeago';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [TabsModule, FormsModule, PhotoEditorComponent],
+  imports: [TabsModule, FormsModule, PhotoEditorComponent, TimeagoModule, DatePipe],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.scss',
 })
@@ -39,19 +41,12 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     const user = this.accountService.currentUser();
     if (!user) return;
-    // * check if member is already loaded in members signal
-    const currentMember = this.memberService
-      .members()
-      .find((m) => m.username === user.username);
-    if (currentMember) {
-      this.member = currentMember;
-      return;
-    }
+
     // * make a request
     this.memberService.getMember(user.username).subscribe({
       next: (member) => {
         this.member = member;
-        this.memberService.updateMembersSignalState(member);
+        // this.memberService.updateMembersSignalState(member);
       },
     });
   }

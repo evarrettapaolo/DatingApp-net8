@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-expand-lg fixed-top border-bottom bg-primary navbar-dark"
+  class="navbar navbar-expand-lg fixed-top border-bottom bg-primary navbar-dark py-1"
 >
   <div class="container-fluid px-3">
     <a class="navbar-brand fw-bold" href="/">Dating App</a>
@@ -69,7 +69,7 @@
         <a
           dropdownToggle
           class="dropdown-toggle text-light text-decoration-none"
-          >Welcome {{ accountService.currentUser()?.username | titlecase }}</a
+          >Welcome {{ accountService.currentUser()?.knownAs }}</a
         >
         <div *dropdownMenu class="dropdown-menu">
           <a class="dropdown-item" routerLink="/member/edit">Edit profile</a>
@@ -79,29 +79,31 @@
       </div>
       <!-- * login form -->
       } @if(!accountService.currentUser()) {
-      <div class="col-lg-4">
-        <form
-          #loginForm="ngForm"
-          (ngSubmit)="login()"
-          class="d-flex"
-          autocomplete="off"
-        >
-          <input
-            name="username"
-            [(ngModel)]="model.username"
-            class="form-control ms-2 me-2 text-white placeholder-wave"
-            placeholder="Username"
-            type="text"
-          />
-          <input
-            name="password"
-            [(ngModel)]="model.password"
-            class="form-control me-2"
-            placeholder="Password"
-            type="password"
-          />
-          <button class="btn btn-secondary" type="submit">Login</button>
-        </form>
+      <div class="row justify-content-center">
+        <div class="col-9 col-lg-12">
+          <form
+            #loginForm="ngForm"
+            (ngSubmit)="login()"
+            class="d-flex"
+            autocomplete="off"
+          >
+            <input
+              name="username"
+              [(ngModel)]="model.username"
+              class="form-control form-control-sm ms-2 me-2 text-white"
+              placeholder="Username"
+              type="text"
+            />
+            <input
+              name="password"
+              [(ngModel)]="model.password"
+              class="form-control form-control-sm me-2"
+              placeholder="Password"
+              type="password"
+            />
+            <button class="btn btn-secondary" type="submit">Login</button>
+          </form>
+        </div>
       </div>
       }
     </div>

@@ -1,3 +1,7 @@
 .nv-file-over {
   border: dotted 3px blue;
 }
+
+.img-thumbnail {
+  width: 196px;  // * force pre-loaded image to fit
+}

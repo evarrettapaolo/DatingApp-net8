@@ -11,21 +11,22 @@ namespace API.Services
   {
     public string CreateToken(AppUser user)
     {
-      // token key
+      // * token key
       var tokenKey = config["TokenKey"] ?? throw new Exception("Cannot access tokenKey from appsettings");
       if (tokenKey.Length < 64) throw new Exception("Your tokenKey needs to be longer");
       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
-      
-      // claims
+
+      // * claims
       var claims = new List<Claim>
       {
-        new(ClaimTypes.NameIdentifier, user.UserName),
+        new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new(ClaimTypes.Name, user.UserName),
       };
 
-      // security algorithm
+      // * security algorithm
       var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-      // execute helper class and methods
+      // * execute helper class and methods
       var tokenDescriptor = new SecurityTokenDescriptor
       {
         Subject = new ClaimsIdentity(claims),
