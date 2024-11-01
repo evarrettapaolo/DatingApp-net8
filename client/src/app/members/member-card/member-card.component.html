@@ -16,7 +16,7 @@
         </button>
       </li>
       <li class="list-inline-item">
-        <button class="btn btn-primary p-1">
+        <button class="btn btn-primary p-1" (click)="toggleLike()">
           <i class="fa fa-heart"></i>
         </button>
       </li>
@@ -29,10 +29,15 @@
   </div>
   <!-- * body -->
   <div class="card-body p-1">
-    <h6 class="card-title text-center mb-1">
-      <i class="fa fa-user me-1"></i>
-      {{ member().knownAs }}, {{ member().age }}
-    </h6>
+    <div class="d-flex justify-content-center align-items-center text-nowrap">
+      <h6 class="card-title text-center mb-0">
+        <i class="fa fa-user me-1"></i>
+        {{ member().knownAs }}, {{ member().age }}
+      </h6>
+      @if(hasLiked()) {
+      <i class="fa fa-heart ms-1 d-flex" style="color: red"></i>
+    }
+    </div>
     <p class="card-text text-muted text-center">{{ member().city }}</p>
   </div>
 </div>
