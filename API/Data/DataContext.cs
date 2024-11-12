@@ -8,13 +8,14 @@ namespace API.Data
   {
     public DbSet<AppUser> Users { get; set; }
     public DbSet<UserLike> Likes { get; set; }
+    public DbSet<Message> Messages{ get; set; }
 
     // * customize the table for UserLike feature
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
 
-      // * like feature many to many relationship
+      // * like feature, many to many relationship
       modelBuilder.Entity<UserLike>()
         .HasKey(k => new { k.SourceUserId, k.TargetUserId });
 
@@ -31,6 +32,18 @@ namespace API.Data
         .WithMany(l => l.LikedByUsers)
         .HasForeignKey(s => s.TargetUserId)
         .OnDelete(DeleteBehavior.Cascade);
+
+      // * message feature, many to many relationship
+      modelBuilder.Entity<Message>()
+        .HasOne(x => x.Recipient)
+        .WithMany(l => l.MessagesReceived)
+        .OnDelete(DeleteBehavior.Restrict);
+
+      modelBuilder.Entity<Message>()
+        .HasOne(x => x.Sender)
+        .WithMany(l => l.MessagesSent)
+        .OnDelete(DeleteBehavior.Restrict);
+
     }
   }
 }

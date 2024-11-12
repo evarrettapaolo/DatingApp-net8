@@ -24,12 +24,13 @@ export class LikesService {
     params = params.append('predicate', predicate);
 
     return this.http
-      .get<Member[]>(`${this.baseUrl}likes?`, {
+      .get<Member[]>(`${this.baseUrl}likes`, {
         observe: 'response',
         params,
       })
       .subscribe({
-        next: response => setPaginatedResponse(response, this.paginatedResult)
+        next: (response) =>
+          setPaginatedResponse(response, this.paginatedResult),
       });
   }
 
